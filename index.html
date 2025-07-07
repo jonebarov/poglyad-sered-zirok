@@ -147,3 +147,266 @@
   </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Погляд серед зірок — Космічна подорож душі</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    /* Основні стилі */
+    body, html {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
+      overflow-x: hidden;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #000010;
+      color: #eee;
+      user-select: none;
+    }
+
+    /* Ефект занурення на завантаженні */
+    body.loading {
+      overflow: hidden;
+    }
+    #intro {
+      position: fixed;
+      top:0; left:0; width:100%; height:100%;
+      background: radial-gradient(ellipse at center, #000000, #0a0a1a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      color: #0ff;
+      font-size: 2.5rem;
+      letter-spacing: 0.2em;
+      opacity: 1;
+      transition: opacity 2s ease;
+    }
+
+    #intro.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Анімація тексту в intro */
+    #intro span {
+      animation: glow 2.5s ease-in-out infinite alternate;
+      display: inline-block;
+      margin: 0 0.1em;
+    }
+    #intro span:nth-child(odd) { animation-delay: 0s;}
+    #intro span:nth-child(even) { animation-delay: 1.2s;}
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+        color: #0ff;
+      }
+      to {
+        text-shadow: none;
+        color: #005555;
+      }
+    }
+
+    /* Фоновий контейнер для галактики */
+    #galaxy-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: visible;
+      pointer-events: none; /* щоб не заважати клікам */
+      z-index: -1;
+    }
+
+    /* Контейнер для сайту */
+    #app {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 20px 40px;
+      z-index: 10;
+    }
+
+    /* Верхній заголовок */
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    header h1 {
+      font-weight: 900;
+      font-size: 3rem;
+      letter-spacing: 0.1em;
+      color: #0ff;
+      text-shadow: 0 0 15px #0ff, 0 0 25px #0ff;
+    }
+    header p {
+      font-size: 1.25rem;
+      color: #8ee;
+      font-style: italic;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Меню розділів */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+    nav button {
+      background: transparent;
+      border: 2px solid #0ff;
+      color: #0ff;
+      padding: 12px 22px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      user-select: none;
+      min-width: 160px;
+      text-align: center;
+    }
+    nav button:hover, nav button.active {
+      background: #0ff;
+      color: #001010;
+      box-shadow: 0 0 20px #0ff;
+      transform: scale(1.1);
+    }
+
+    /* Розділи контенту */
+    section.content-section {
+      background: rgba(10, 15, 30, 0.9);
+      border-radius: 16px;
+      padding: 30px 40px;
+      margin-bottom: 80px;
+      box-shadow: 0 0 40px #00ffff55;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      opacity: 0;
+      transform: translateY(40px);
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      display: none;
+    }
+    section.content-section.active {
+      opacity: 1;
+      transform: translateY(0);
+      display: block;
+    }
+
+    section.content-section h2 {
+      font-weight: 700;
+      color: #00ffff;
+      text-shadow: 0 0 15px #00ffffaa;
+      margin-bottom: 25px;
+      font-size: 2.2rem;
+      user-select: text;
+    }
+    section.content-section p {
+      line-height: 1.5;
+      font-size: 1.1rem;
+      color: #ccddee;
+      user-select: text;
+      margin-bottom: 15px;
+    }
+
+    /* Картинки планет */
+    .planet-img {
+      max-width: 300px;
+      display: block;
+      margin: 25px auto;
+      border-radius: 18px;
+      box-shadow: 0 0 25px #00ffffaa;
+      transition: transform 0.4s ease;
+    }
+    .planet-img:hover {
+      transform: scale(1.05) rotate(2deg);
+      cursor: pointer;
+    }
+
+    /* Психологічний блок */
+    .psychology-block {
+      margin-top: 25px;
+      padding: 20px;
+      background: #002233cc;
+      border-radius: 12px;
+      font-style: italic;
+      color: #aaffffdd;
+      border-left: 4px solid #00ffff;
+      user-select: text;
+    }
+
+    /* Футер */
+    footer {
+      text-align: center;
+      color: #005555;
+      font-size: 0.9rem;
+      padding: 20px 10px;
+      letter-spacing: 0.1em;
+      border-top: 1px solid #00444433;
+      margin-top: 100px;
+    }
+
+    /* Анімація галактики і планети */
+    #galaxy-svg {
+      width: 100vw;
+      height: 100vh;
+      user-select: none;
+    }
+    .galaxy-glow {
+      filter: url(#glow);
+      transform-origin: center center;
+      animation: galaxyRotate 120s linear infinite;
+    }
+    @keyframes galaxyRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .planet-highlight {
+      cursor: pointer;
+      filter: drop-shadow(0 0 6px #00ffffcc);
+      transition: filter 0.3s ease;
+    }
+    .planet-highlight:hover {
+      filter: drop-shadow(0 0 15px #00ffffee);
+      transform: scale(1.1);
+    }
+
+    /* Акцентована Земля */
+    #earth {
+      filter: drop-shadow(0 0 20px #33ffffcc);
+      animation: pulseEarth 4s ease-in-out infinite;
+      cursor: pointer;
+    }
+    @keyframes pulseEarth {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+  </style>
+</head>
+<body class="loading">
+
+  <!-- Ефект занурення -->
+  <div id="intro">
+    <span>П</span><span>о</span><span>г</span><span>л</span><span>я</span><span>д</span> &nbsp;
+    <span>с</span><span>е</span><span>р</span><span>е</span><span>д</span> &nbsp;
+    <span>з</span><span>і</span><span>р</span><span>о</span><span>к</span><span>.</span>
+  </div>
+
+  <!-- Фонова анімована галактика -->
+  <div id="galaxy-container">
+    <svg id="galaxy-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" >
+      <defs>
+        <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#99ffff" stop-opacity="1" />
+          <stop offset="100%" stop-color="#004466" stop-opacity="0" />
+        </radialGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%" >
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#00ffff" flood-opacity="0.6"/>
