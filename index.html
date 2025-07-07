@@ -8,136 +8,141 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: radial-gradient(ellipse at center, #0d0d2b 0%, #000000 100%);
       color: white;
       overflow-x: hidden;
-      cursor: url('https://cdn-icons-png.flaticon.com/512/744/744465.png'), auto;
+      background: black;
     }
-    section {
-      padding: 80px 20px;
-      text-align: center;
-      transition: all 0.6s ease;
-    }
-    h1, h2 {
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-    .stars {
+    .video-background {
       position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: url('https://raw.githubusercontent.com/jonebarov/poglyad-sered-zirok/main/assets/stars.gif') repeat;
+      object-fit: cover;
       z-index: -2;
-      animation: moveStars 60s linear infinite;
     }
-    @keyframes moveStars {
-      from { background-position: 0 0; }
-      to { background-position: 10000px 10000px; }
-    }
-    .planet {
-      width: 120px;
-      height: 120px;
-      margin: 20px auto;
-      border-radius: 50%;
-      background: radial-gradient(circle, #44c0ff, #0b3c5d);
-      animation: float 3s ease-in-out infinite;
-      cursor: pointer;
-      transition: transform 1s;
-    }
-    .planet:hover {
-      transform: scale(1.2) rotate(360deg);
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    .blackhole {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin: 20px auto;
-      background: radial-gradient(circle, #000, #222);
-      box-shadow: 0 0 30px 10px #222 inset;
-      animation: pulse 3s infinite;
-      cursor: pointer;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-    .modal {
-      display: none;
+    .overlay {
       position: fixed;
-      z-index: 999;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      color: white;
-      justify-content: center;
-      align-items: center;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+    header {
       text-align: center;
+      padding: 100px 20px 60px;
+      background-color: rgba(0, 0, 0, 0.5);
     }
-    .modal-content {
-      max-width: 600px;
-      padding: 30px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid #888;
-      border-radius: 20px;
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
     }
-    .close {
-      position: absolute;
-      top: 20px; right: 30px;
-      font-size: 30px;
-      cursor: pointer;
+    header p {
+      font-size: 1.2em;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    nav {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      color: #66ffcc;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    section img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .section-title {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    .glow {
+      text-shadow: 0 0 5px #fff, 0 0 10px #66ffcc, 0 0 20px #66ffcc;
     }
   </style>
 </head>
 <body>
-  <div class="stars"></div>
+  <video class="video-background" autoplay loop muted>
+    <source src="https://cdn.pixabay.com/video/2022/11/14/139088-775667728_large.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
 
-  <section style="background-color: rgba(0,0,0,0.6);">
-    <h1>Погляд серед зірок</h1>
-    <p>Подорож душі крізь глибини космосу, апатії та самопізнання.</p>
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_b84adfdcb7.mp3" type="audio/mpeg">
+  </audio>
+
+  <header>
+    <h1 class="glow">Погляд серед зірок</h1>
+    <p>Мандрівка крізь внутрішній космос. Доторкнись до зірок, що спалахують у глибинах душі.</p>
+  </header>
+
+  <nav>
+    <a href="#hope">Світло надії</a>
+    <a href="#darkness">Темрява всередині</a>
+    <a href="#acceptance">Прийняття</a>
+    <a href="#expression">Висловлення</a>
+  </nav>
+
+  <section id="hope">
+    <div class="section-title glow">Світло надії</div>
+    <p>Коли здається, що темрява навколо надто густа — навіть найменша зірка може стати маяком. Пошук підтримки, рутина, дихання — це твої інструменти.</p>
+    <ul>
+      <li>Почни з простого — зроби ковток води, глибоко вдихни.</li>
+      <li>Прогулянка. Навіть кілька кроків — це рух уперед.</li>
+      <li>Знайди рутину, яка повертає тебе в тіло: душ, їжа, музика.</li>
+    </ul>
+    <img src="https://cdn.pixabay.com/photo/2021/01/14/07/09/moon-5914175_1280.jpg" alt="Світло у темряві">
   </section>
 
-  <section style="background-color:#112244">
-    <h2>Світло надії</h2>
-    <div class="planet" onclick="showModal('Планета відкрила перед вами неймовірні ландшафти внутрішнього світу...')"></div>
-    <p>Цей розділ про способи подолання депресії, апатії та емоційного вигоряння. Твої зірки ще не згасли.</p>
+  <section id="darkness">
+    <div class="section-title glow">Темрява всередині</div>
+    <p>Темрява — не ворог. Вона тримає відповіді, які світло не може показати. Дозволь собі подивитись у неї без страху.</p>
+    <ul>
+      <li>Запиши свої емоції — дай їм форму.</li>
+      <li>Уяви темряву не як кінець, а як землю, в якій проростає зерно.</li>
+    </ul>
+    <img src="https://cdn.pixabay.com/photo/2020/11/24/17/16/fantasy-5772381_1280.jpg" alt="Темрява та внутрішній всесвіт">
   </section>
 
-  <section style="background-color:#331144">
-    <h2>Світло й темрява</h2>
-    <div class="blackhole" onclick="showModal('Вас поглинає чорнота... Але в серці пітьми світяться ваші істинні бажання.')"></div>
-    <p>Прийняття темних сторін себе — перший крок до справжньої цілісності.</p>
+  <section id="acceptance">
+    <div class="section-title glow">Прийняття</div>
+    <p>Ти — не лише своє світло, а й своя тінь. Прийняття себе без умов — це найсильніша форма любові до себе.</p>
+    <ul>
+      <li>Замість боротьби з собою — обійми себе.</li>
+      <li>Прийми свої помилки як частину шляху.</li>
+    </ul>
+    <img src="https://cdn.pixabay.com/photo/2021/01/18/21/08/meditation-5927387_1280.jpg" alt="Прийняття себе">
   </section>
 
-  <section style="background-color:#223344">
-    <h2>Твоє повідомлення</h2>
+  <section id="expression">
+    <div class="section-title glow">Висловлення</div>
+    <p>Голос душі лунає тоді, коли ми ділимось. Напиши свої думки — це не просто слова, це відлуння твого Всесвіту.</p>
     <textarea id="message" placeholder="Поділись своїми думками..." rows="5" style="width:80%;"></textarea>
     <br>
     <button onclick="submitMessage()">Надіслати</button>
     <div id="confirmation" style="margin-top: 10px; color: #66ffcc;"></div>
   </section>
 
-  <audio autoplay loop volume="0.3">
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_b84adfdcb7.mp3" type="audio/mpeg">
-  </audio>
-
-  <div class="modal" id="modal">
-    <div class="close" onclick="closeModal()">&times;</div>
-    <div class="modal-content" id="modalContent"></div>
-  </div>
-
   <script>
-    function showModal(text) {
-      document.getElementById('modalContent').textContent = text;
-      document.getElementById('modal').style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('modal').style.display = 'none';
-    }
     function submitMessage() {
       const msg = document.getElementById('message').value;
       if (msg.length > 0) {
