@@ -1,120 +1,151 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <title>index.html</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: radial-gradient(ellipse at center, #0b0c1e 0%, #000000 100%);
-            color: white;
-            overflow-x: hidden;
-        }
-        header {
-            text-align: center;
-            padding: 50px 20px 20px;
-            font-size: 2.5em;
-            background: rgba(255, 255, 255, 0.05);
-        }
-        section {
-            padding: 40px 20px;
-            max-width: 800px;
-            margin: auto;
-            animation: fadeIn 2s ease-in;
-        }
-        h2 {
-            color: #7ecfff;
-        }
-        textarea, input, select, button {
-            width: 100%;
-            margin-top: 10px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1em;
-        }
-        button {
-            background-color: #7ecfff;
-            color: #000;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        @keyframes fadeIn {
-            from {opacity: 0; transform: translateY(20px);}
-            to {opacity: 1; transform: translateY(0);}
-        }
-        .music-player {
-            text-align: center;
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Погляд серед зірок</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(ellipse at center, #0d0d2b 0%, #000000 100%);
+      color: white;
+      overflow-x: hidden;
+      cursor: url('https://cdn-icons-png.flaticon.com/512/744/744465.png'), auto;
+    }
+    section {
+      padding: 80px 20px;
+      text-align: center;
+      transition: all 0.6s ease;
+    }
+    h1, h2 {
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: url('https://raw.githubusercontent.com/jonebarov/poglyad-sered-zirok/main/assets/stars.gif') repeat;
+      z-index: -2;
+      animation: moveStars 60s linear infinite;
+    }
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: 10000px 10000px; }
+    }
+    .planet {
+      width: 120px;
+      height: 120px;
+      margin: 20px auto;
+      border-radius: 50%;
+      background: radial-gradient(circle, #44c0ff, #0b3c5d);
+      animation: float 3s ease-in-out infinite;
+      cursor: pointer;
+      transition: transform 1s;
+    }
+    .planet:hover {
+      transform: scale(1.2) rotate(360deg);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .blackhole {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 20px auto;
+      background: radial-gradient(circle, #000, #222);
+      box-shadow: 0 0 30px 10px #222 inset;
+      animation: pulse 3s infinite;
+      cursor: pointer;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: white;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .modal-content {
+      max-width: 600px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #888;
+      border-radius: 20px;
+    }
+    .close {
+      position: absolute;
+      top: 20px; right: 30px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
+  <div class="stars"></div>
 
-<header>Погляд серед зірок</header>
+  <section style="background-color: rgba(0,0,0,0.6);">
+    <h1>Погляд серед зірок</h1>
+    <p>Подорож душі крізь глибини космосу, апатії та самопізнання.</p>
+  </section>
 
-<section>
-    <h2>Коли світ стихає</h2>
-    <p>Іноді тиша космосу ближча, ніж слова людей. Коли навколо темрява, варто підняти погляд серед зірок — і ти побачиш себе.</p>
-</section>
+  <section style="background-color:#112244">
+    <h2>Світло надії</h2>
+    <div class="planet" onclick="showModal('Планета відкрила перед вами неймовірні ландшафти внутрішнього світу...')"></div>
+    <p>Цей розділ про способи подолання депресії, апатії та емоційного вигоряння. Твої зірки ще не згасли.</p>
+  </section>
 
-<section>
-    <h2>Темна матерія душі</h2>
-    <p>Апатія і депресія схожі на темну матерію — вони не завжди помітні, але сильно впливають на наше життя. Цей простір створений, щоб допомогти знайти світло в темряві.</p>
-</section>
+  <section style="background-color:#331144">
+    <h2>Світло й темрява</h2>
+    <div class="blackhole" onclick="showModal('Вас поглинає чорнота... Але в серці пітьми світяться ваші істинні бажання.')"></div>
+    <p>Прийняття темних сторін себе — перший крок до справжньої цілісності.</p>
+  </section>
 
-<section>
-    <h2>Вихід на орбіту</h2>
-    <p>Кожен може знайти свою орбіту — стан, де легше дихати. Це може бути музика, прогулянка, розмова, або навіть ця сторінка. </p>
-</section>
+  <section style="background-color:#223344">
+    <h2>Твоє повідомлення</h2>
+    <textarea id="message" placeholder="Поділись своїми думками..." rows="5" style="width:80%;"></textarea>
+    <br>
+    <button onclick="submitMessage()">Надіслати</button>
+    <div id="confirmation" style="margin-top: 10px; color: #66ffcc;"></div>
+  </section>
 
-<section>
-    <h2>Гравітація тиші</h2>
-    <p>Момент, коли ти залишаєшся наодинці з собою — не завжди порожнеча. Це гравітація тиші, де народжується новий сенс.</p>
-</section>
+  <audio autoplay loop volume="0.3">
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_b84adfdcb7.mp3" type="audio/mpeg">
+  </audio>
 
-<section>
-    <h2>Сигнали з глибини</h2>
-    <p>Цей сайт — сигнал. Якщо ти його читаєш — ти не один.</p>
-</section>
+  <div class="modal" id="modal">
+    <div class="close" onclick="closeModal()">&times;</div>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
 
-<section>
-    <h2>Моя історія</h2>
-    <p>Я перебував у стані апатії та емоційного стресу, відчував відсутність сил, натхнення та прагнення працювати чи розвиватися. Це було випробуванням, але також початком шляху до внутрішнього пробудження.</p>
-</section>
-
-<section>
-    <h2>Твій простір думок</h2>
-    <form>
-        <label for="thoughts">Поділись своїми думками або побажанням:</label>
-        <textarea id="thoughts" rows="5" placeholder="Тут ти можеш виговоритись..."></textarea>
-        <button type="button" onclick="alert('Дякуємо за твої думки. Вони важливі.')">Надіслати</button>
-    </form>
-</section>
-
-<section class="music-player">
-    <h2>Музика для фону</h2>
-    <select onchange="changeMusic(this.value)">
-        <option value="">-- Обери композицію --</option>
-        <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">Ambient Космос</option>
-        <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">Спокій і тиша</option>
-    </select>
-    <audio id="audio" controls style="margin-top: 10px;">
-        <source src="" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-</section>
-
-<script>
-    function changeMusic(url) {
-        const audio = document.getElementById('audio');
-        audio.src = url;
-        audio.play();
+  <script>
+    function showModal(text) {
+      document.getElementById('modalContent').textContent = text;
+      document.getElementById('modal').style.display = 'flex';
     }
-</script>
-
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+    function submitMessage() {
+      const msg = document.getElementById('message').value;
+      if (msg.length > 0) {
+        localStorage.setItem('user_msg_' + Date.now(), msg);
+        document.getElementById('confirmation').textContent = 'Повідомлення збережено анонімно.';
+        document.getElementById('message').value = '';
+      }
+    }
+  </script>
 </body>
 </html>
